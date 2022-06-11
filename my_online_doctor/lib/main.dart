@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_online_doctor/ajustes.dart';
 import 'package:my_online_doctor/core/context_manager.dart';
 import 'package:my_online_doctor/core/injection_manager.dart';
+import 'package:my_online_doctor/ui/search_doctor/search_doctor_page.dart';
 void main() {
 
   InjectionManager.setupInjections();
@@ -42,7 +43,7 @@ class MyHomePage extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.settings),
-            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Ajustes())),
+            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SearchDoctorPage())),
             // onPressed: () => _mostrarAjustes(context),
           )
         ]
@@ -57,7 +58,7 @@ class MyHomePage extends StatelessWidget {
 
   void _mostrarAjustes(BuildContext context) {
     context = getIt<ContextManager>().context;
-    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Ajustes())
+    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => SearchDoctorPage())
     );
   }
 
