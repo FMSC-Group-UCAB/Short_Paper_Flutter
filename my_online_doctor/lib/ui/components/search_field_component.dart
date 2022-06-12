@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_online_doctor/core/context_manager.dart';
+import 'package:my_online_doctor/core/injection_manager.dart';
 import 'package:my_online_doctor/ui/styles/colors.dart';
 
 class SearchFieldComponent extends StatefulWidget {
@@ -19,15 +21,19 @@ class SearchFieldComponent extends StatefulWidget {
 
 class _SearchFieldComponentState extends State<SearchFieldComponent> {
   final _searchController = TextEditingController();
+  
 
   @override
   Widget build(BuildContext context) {
-    const styleActive = TextStyle(color: colorPrimary);
-    const styleHint = TextStyle(color: colorBlack);
+
+    getIt<ContextManager>().screenSize = MediaQuery.of(context).size;
+
+    const styleActive = TextStyle(color: Colors.black);
+    const styleHint = TextStyle(color: Colors.black54);
     final style = widget.text.isEmpty ? styleHint : styleActive;
 
     return Container(
-      height: 42,
+      height: getIt<ContextManager>().screenSize.height * 0.075,
       margin: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),

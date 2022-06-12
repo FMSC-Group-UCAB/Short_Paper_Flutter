@@ -34,6 +34,17 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
    
   ];
 
+  late List<Doctor> doctors2;
+
+  @override
+  void initState() {
+    super.initState();
+
+    doctors2 = doctors;
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -42,12 +53,7 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
         title: Text('Buscador de doctores',
         style: textStyleAppBar(),
         ),
-        // actions: [
-        //   IconButton(
-        //     icon: const Icon(Icons.settings),
-        //     onPressed: () => {},
-        //   )
-        // ],
+        centerTitle: true,
         // automaticallyImplyLeading: false, //Elimina el back button
       ),
       body: Column(
@@ -56,23 +62,15 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
         _buildDoctorSearch(),
         Expanded(
           child: Container(
-            padding: const EdgeInsets.fromLTRB(8, 16, 16, 16),
+            padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
             child: ListView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               itemCount: doctors.length,
               itemBuilder: (context, index) {
                 final doctor = doctors[index];
-
-                return ListTile(
-                  // leading: const Icon(Icons.person),
-                  leading: CircleAvatar(
-                    radius: 48,
-                    backgroundImage: NetworkImage(doctor.photo),
-                  ),
-                  title: Text('${doctor.firstName} ${doctor.lastName}'),
-                  subtitle: Text(doctor.specialties[0].value),
-                );
+                
+                return _buildDoctor(doctor);
               }
             ),
           ),
@@ -85,6 +83,15 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
   }
 
 
+  Widget _buildDoctor(Doctor doctor) =>  ListTile(
+    leading: CircleAvatar(
+      radius: 48,
+      backgroundImage: NetworkImage(doctor.photo),
+    ),
+    title: Text('${doctor.firstName} ${doctor.lastName}'),
+    subtitle: Text(doctor.specialties[0].value),
+  );
+
   Widget _buildDoctorSearch() => SearchFieldComponent(
     text: _searchDoctorController.text, 
     onChanged: _searchDoctor, 
@@ -94,14 +101,19 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
 
   void _searchDoctor(String queryText) {
     final doctorSuggestions = doctors.where((doctor) {
-      final doctorName = doctor.firstName.toLowerCase();
+      final firstName = doctor.firstName.toLowerCase();
+      final lastName = doctor.lastName.toLowerCase();
+      final specialty = doctor.specialties[0].value.toLowerCase();
       final input = queryText.toLowerCase();
 
-      return doctorName.contains(input);
+      return firstName.contains(input) || lastName.contains(input) || specialty.contains(input);
 
     }).toList();
 
-    setState(() => doctors = doctorSuggestions);
+    setState(() {
+      doctors = queryText.isEmpty ? doctors2 : doctorSuggestions;
+      _searchDoctorController.text = queryText;
+    });
 
   }
 
