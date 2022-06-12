@@ -16,7 +16,10 @@ class SearchDoctorPage extends StatefulWidget {
 
 class _SearchDoctorPageState extends State<SearchDoctorPage> {
 
+  bool isTop = true;
+
   final TextEditingController _searchDoctorController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
 
   List<Doctor> doctors = [
     Doctor.create('1', 'Juan', 'Perez', [SpecialtyType.cardiology], 'Calle 1', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', GenderType.male),
@@ -40,7 +43,17 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
   void initState() {
     super.initState();
 
+    _scrollController.addListener(_scrollListener);
+
     doctors2 = doctors;
+  }
+
+
+  void _scrollListener(){
+    if(_scrollController.position.atEdge){
+      setState(() => isTop = !isTop); 
+    }
+
   }
 
 
@@ -64,6 +77,7 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
           child: Container(
             padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
             child: ListView.builder(
+              controller: _scrollController,
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               itemCount: doctors.length,
@@ -77,7 +91,11 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
         ),
 
         ],
-      )
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: isTop ? _scrollToDown : _scrollToUp,
+        child: isTop ? const Icon(Icons.arrow_downward) : const Icon(Icons.arrow_upward),
+      ),
     );
 
   }
@@ -114,6 +132,26 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
       doctors = queryText.isEmpty ? doctors2 : doctorSuggestions;
       _searchDoctorController.text = queryText;
     });
+
+  }
+
+
+  void _scrollToDown() {
+    _scrollController.animateTo(
+      _scrollController.position.maxScrollExtent,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeIn,
+    );
+
+  } 
+
+
+  void _scrollToUp(){
+    _scrollController.animateTo(
+      _scrollController.position.minScrollExtent,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeIn,
+    );
 
   }
 
