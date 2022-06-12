@@ -4,6 +4,7 @@ import 'package:my_online_doctor/core/injection_manager.dart';
 import 'package:my_online_doctor/domain/entities/doctor.dart';
 import 'package:my_online_doctor/domain/enumerations/gender_type_enum.dart';
 import 'package:my_online_doctor/domain/enumerations/specialty_type_enum.dart';
+import 'package:my_online_doctor/request/doctor_request.dart';
 import 'package:my_online_doctor/ui/components/search_field_component.dart';
 import 'package:my_online_doctor/ui/styles/colors.dart';
 import 'package:my_online_doctor/ui/styles/themes.dart';
@@ -23,19 +24,21 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
   final TextEditingController _searchDoctorController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
 
+  final DoctorRequest doctorRequest = DoctorRequest();
+
   List<Doctor> doctors = [
-    Doctor.create('1', 'Juan', 'Perez', [SpecialtyType.cardiology], 'Calle 1', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', GenderType.male),
-    Doctor.create('2', 'Maria', 'Juana', [SpecialtyType.opthalmology], 'Su consultorios', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', GenderType.female),
-    Doctor.create('1', 'Juan', 'Perez', [SpecialtyType.cardiology], 'Calle 1', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', GenderType.male),
-    Doctor.create('2', 'Maria', 'Juana', [SpecialtyType.opthalmology], 'Su consultorios', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', GenderType.female),
-    Doctor.create('1', 'Juan', 'Perez', [SpecialtyType.cardiology], 'Calle 1', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', GenderType.male),
-    Doctor.create('2', 'Maria', 'Juana', [SpecialtyType.opthalmology], 'Su consultorios', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', GenderType.female),
-    Doctor.create('1', 'Juan', 'Perez', [SpecialtyType.cardiology], 'Calle 1', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', GenderType.male),
-    Doctor.create('2', 'Maria', 'Juana', [SpecialtyType.opthalmology], 'Su consultorios', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', GenderType.female),
-    Doctor.create('1', 'Juan', 'Perez', [SpecialtyType.cardiology], 'Calle 1', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', GenderType.male),
-    Doctor.create('2', 'Maria', 'Juana', [SpecialtyType.opthalmology], 'Su consultorios', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', GenderType.female),
-    Doctor.create('1', 'Juan', 'Perez', [SpecialtyType.cardiology], 'Calle 1', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', GenderType.male),
-    Doctor.create('2', 'Maria', 'Juana', [SpecialtyType.opthalmology], 'Su consultorios', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', GenderType.female),
+    Doctor(id:'1', firstName: 'Juan', lastName: 'Perez', specialties: [SpecialtyType.cardiology], location: 'Calle 1', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: GenderType.male),
+    Doctor(id:'2', firstName: 'Maria', lastName: 'Juana', specialties: [SpecialtyType.opthalmology], location: 'Su consultorios', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: GenderType.female),
+    Doctor(id:'1', firstName: 'Juan', lastName: 'Perez', specialties: [SpecialtyType.cardiology], location: 'Calle 1', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: GenderType.male),
+    Doctor(id:'2', firstName: 'Maria', lastName: 'Juana', specialties: [SpecialtyType.opthalmology], location: 'Su consultorios', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: GenderType.female),
+    Doctor(id:'1', firstName: 'Juan', lastName: 'Perez', specialties: [SpecialtyType.cardiology], location: 'Calle 1', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: GenderType.male),
+    Doctor(id:'2', firstName: 'Maria', lastName: 'Juana', specialties: [SpecialtyType.opthalmology], location: 'Su consultorios', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: GenderType.female),
+    Doctor(id:'1', firstName: 'Juan', lastName: 'Perez', specialties: [SpecialtyType.cardiology], location: 'Calle 1', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: GenderType.male),
+    Doctor(id:'2', firstName: 'Maria', lastName: 'Juana', specialties: [SpecialtyType.opthalmology], location: 'Su consultorios',  photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: GenderType.female),
+    Doctor(id:'1', firstName: 'Juan', lastName: 'Perez', specialties: [SpecialtyType.cardiology], location: 'Calle 1', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: GenderType.male),
+    Doctor(id:'2', firstName: 'Maria', lastName: 'Juana', specialties: [SpecialtyType.opthalmology], location: 'Su consultorios', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg',  gender:GenderType.female),
+    Doctor(id:'1', firstName: 'Juan', lastName: 'Perez', specialties: [SpecialtyType.cardiology], location: 'Calle 1', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: GenderType.male),
+    Doctor(id:'2', firstName: 'Maria', lastName: 'Juana', specialties: [SpecialtyType.opthalmology], location: 'Su consultorios', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: GenderType.female),
    
   ];
 
@@ -74,35 +77,7 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
         backgroundColor: colorPrimary,
         // automaticallyImplyLeading: false, //Elimina el back button
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-        _buildDoctorSearch(),
-        Expanded(
-          child: Container(
-            padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
-            child: doctors.isNotEmpty ? ListView.builder(
-              controller: _scrollController,
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemCount: doctors.length,
-              itemBuilder: (context, index) {
-                final doctor = doctors[index];
-                
-                return _buildDoctor(doctor);
-              }
-            ):  Center(
-              child: Image.asset(
-                'assets/images/no_doctor.png', 
-                width: getIt<ContextManager>().screenSize.width * 0.8,
-                height: getIt<ContextManager>().screenSize.height * 0.6, 
-              ),
-            ),
-          ),
-        ),
-
-        ],
-      ),
+      body: _body(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: colorPrimary,
         onPressed: _changeScrollDirection,
@@ -113,30 +88,80 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
   }
 
 
+  Widget _body() => Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+    _buildDoctorSearchBar(),
+    Expanded(
+      child: FutureBuilder(
+        future: doctorRequest.getAllDoctors(),
+        builder: (BuildContext context, AsyncSnapshot<List<Doctor>> snapshot) {
+          if(snapshot.hasData){
+            doctors = snapshot.data!;
+            doctors2 = snapshot.data!;
+            return _search();
+          }else if(snapshot.hasError){
+            return Center(child: Text(snapshot.error.toString()));
+          }else{
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
+    ),
+
+    ],
+  );
+
+
+  Widget _search() => Container(
+        padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
+        child: doctors.isNotEmpty ? ListView.builder(
+          controller: _scrollController,
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          itemCount: doctors.length,
+          itemBuilder: (context, index) {
+            final doctor = doctors[index];
+            
+            return _buildDoctor(doctor);
+          }
+        ):  Center(
+          child: Image.asset(
+            'assets/images/no_doctor.png', 
+            width: getIt<ContextManager>().screenSize.width * 0.8,
+            height: getIt<ContextManager>().screenSize.height * 0.6, 
+          ),
+        ),
+      );
+
+
+
+
   Widget _buildDoctor(Doctor doctor) =>  ListTile(
-    leading: CircleAvatar(
+    leading: const CircleAvatar(
       radius: 48,
-      backgroundImage: NetworkImage(doctor.photo),
+      backgroundImage: NetworkImage('https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg'),
     ),
     title: doctor.gender == GenderType.male ? Text('Dr. ${doctor.firstName} ${doctor.lastName}'): Text('Dra. ${doctor.firstName} ${doctor.lastName}'),
     subtitle: Text(doctor.specialties[0].value),
   );
 
-  Widget _buildDoctorSearch() => SearchFieldComponent(
+  Widget _buildDoctorSearchBar() => SearchFieldComponent(
     text: _searchDoctorController.text, 
     onChanged: _searchDoctor, 
-    hintText: 'Buscar doctores'
+    hintText: 'Buscar doctores por especialidad'
   );
 
 
   void _searchDoctor(String queryText) {
     final doctorSuggestions = doctors.where((doctor) {
-      final firstName = doctor.firstName.toLowerCase();
-      final lastName = doctor.lastName.toLowerCase();
+      // final firstName = doctor.firstName.toLowerCase();
+      // final lastName = doctor.lastName.toLowerCase();
       final specialty = doctor.specialties[0].value.toLowerCase();
       final input = queryText.toLowerCase();
 
-      return firstName.contains(input) || lastName.contains(input) || specialty.contains(input);
+      // return firstName.contains(input) || lastName.contains(input) || specialty.contains(input);
+      return specialty.contains(input);
 
     }).toList();
 
