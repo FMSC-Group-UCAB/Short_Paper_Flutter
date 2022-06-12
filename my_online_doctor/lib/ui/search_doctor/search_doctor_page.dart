@@ -108,7 +108,7 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
       radius: 48,
       backgroundImage: NetworkImage(doctor.photo),
     ),
-    title: Text('${doctor.firstName} ${doctor.lastName}'),
+    title: doctor.gender == GenderType.male ? Text('Dr. ${doctor.firstName} ${doctor.lastName}'): Text('Dra. ${doctor.firstName} ${doctor.lastName}'),
     subtitle: Text(doctor.specialties[0].value),
   );
 
