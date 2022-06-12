@@ -3,13 +3,13 @@ import 'package:my_online_doctor/domain/enumerations/specialty_type_enum.dart';
 
 class Doctor {
 
-  late final String id;
+  late final int id;
   late String firstName;
   late String lastName;
-  late List<SpecialtyType> specialties;
-  late String location;
+  late List<dynamic> specialties;
+  // late String location;
   late String photo;
-  late GenderType gender;
+  late String gender;
 
 
   ///Constructor
@@ -30,7 +30,7 @@ class Doctor {
     required this.firstName,
     required this.lastName,
     required this.specialties,
-    required this.location,
+    // required this.location,
     required this.photo,
     required this.gender
   });
@@ -66,9 +66,9 @@ class Doctor {
       firstName:  json['firstName'],
       lastName:  json['lastName'],
       specialties:  json['specialties'],
-      location:  json['location'],
-      photo:  json['photo'],
-      gender:  json['gender'],
+      // location:  json['location'],
+      photo:  json['image'],
+      gender:  json['sex'],
     );
     
 

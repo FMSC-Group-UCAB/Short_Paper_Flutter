@@ -27,18 +27,18 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
   final DoctorRequest doctorRequest = DoctorRequest();
 
   List<Doctor> doctors = [
-    Doctor(id:'1', firstName: 'Juan', lastName: 'Perez', specialties: [SpecialtyType.cardiology], location: 'Calle 1', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: GenderType.male),
-    Doctor(id:'2', firstName: 'Maria', lastName: 'Juana', specialties: [SpecialtyType.opthalmology], location: 'Su consultorios', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: GenderType.female),
-    Doctor(id:'1', firstName: 'Juan', lastName: 'Perez', specialties: [SpecialtyType.cardiology], location: 'Calle 1', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: GenderType.male),
-    Doctor(id:'2', firstName: 'Maria', lastName: 'Juana', specialties: [SpecialtyType.opthalmology], location: 'Su consultorios', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: GenderType.female),
-    Doctor(id:'1', firstName: 'Juan', lastName: 'Perez', specialties: [SpecialtyType.cardiology], location: 'Calle 1', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: GenderType.male),
-    Doctor(id:'2', firstName: 'Maria', lastName: 'Juana', specialties: [SpecialtyType.opthalmology], location: 'Su consultorios', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: GenderType.female),
-    Doctor(id:'1', firstName: 'Juan', lastName: 'Perez', specialties: [SpecialtyType.cardiology], location: 'Calle 1', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: GenderType.male),
-    Doctor(id:'2', firstName: 'Maria', lastName: 'Juana', specialties: [SpecialtyType.opthalmology], location: 'Su consultorios',  photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: GenderType.female),
-    Doctor(id:'1', firstName: 'Juan', lastName: 'Perez', specialties: [SpecialtyType.cardiology], location: 'Calle 1', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: GenderType.male),
-    Doctor(id:'2', firstName: 'Maria', lastName: 'Juana', specialties: [SpecialtyType.opthalmology], location: 'Su consultorios', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg',  gender:GenderType.female),
-    Doctor(id:'1', firstName: 'Juan', lastName: 'Perez', specialties: [SpecialtyType.cardiology], location: 'Calle 1', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: GenderType.male),
-    Doctor(id:'2', firstName: 'Maria', lastName: 'Juana', specialties: [SpecialtyType.opthalmology], location: 'Su consultorios', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: GenderType.female),
+    Doctor(id:1, firstName: 'Juan', lastName: 'Perez', specialties: ['Cardiologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'M'),
+    Doctor(id:2, firstName: 'Maria', lastName: 'Juana', specialties: ['Oftalmologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'F'),
+    Doctor(id:1, firstName: 'Juan', lastName: 'Perez', specialties: ['Cardiologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'M'),
+    Doctor(id:2, firstName: 'Maria', lastName: 'Juana', specialties: ['Oftalmologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'F'),
+    Doctor(id:1, firstName: 'Juan', lastName: 'Perez', specialties: ['Cardiologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'M'),
+    Doctor(id:2, firstName: 'Maria', lastName: 'Juana', specialties: ['Oftalmologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'F'),
+    Doctor(id:1, firstName: 'Juan', lastName: 'Perez', specialties: ['Cardiologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'M'),
+    Doctor(id:2, firstName: 'Maria', lastName: 'Juana', specialties: ['Oftalmologia'],  photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'F'),
+    Doctor(id:1, firstName: 'Juan', lastName: 'Perez', specialties: ['Cardiologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'M'),
+    Doctor(id:2, firstName: 'Maria', lastName: 'Juana', specialties: ['Oftalmologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg',  gender:'F'),
+    Doctor(id:1, firstName: 'Juan', lastName: 'Perez', specialties: ['Cardiologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'M'),
+    Doctor(id:2, firstName: 'Maria', lastName: 'Juana', specialties: ['Oftalmologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'F'),
    
   ];
 
@@ -142,8 +142,8 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
       radius: 48,
       backgroundImage: NetworkImage('https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg'),
     ),
-    title: doctor.gender == GenderType.male ? Text('Dr. ${doctor.firstName} ${doctor.lastName}'): Text('Dra. ${doctor.firstName} ${doctor.lastName}'),
-    subtitle: Text(doctor.specialties[0].value),
+    title: doctor.gender == 'M' ? Text('Dr. ${doctor.firstName} ${doctor.lastName}'): Text('Dra. ${doctor.firstName} ${doctor.lastName}'),
+    subtitle: Text(doctor.specialties[0]),
   );
 
   Widget _buildDoctorSearchBar() => SearchFieldComponent(
@@ -157,7 +157,7 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
     final doctorSuggestions = doctors.where((doctor) {
       // final firstName = doctor.firstName.toLowerCase();
       // final lastName = doctor.lastName.toLowerCase();
-      final specialty = doctor.specialties[0].value.toLowerCase();
+      final specialty = doctor.specialties[0].toLowerCase();
       final input = queryText.toLowerCase();
 
       // return firstName.contains(input) || lastName.contains(input) || specialty.contains(input);
