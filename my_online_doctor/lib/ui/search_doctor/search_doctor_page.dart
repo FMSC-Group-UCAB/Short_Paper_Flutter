@@ -93,7 +93,7 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: isTop ? _scrollToBottom : _scrollToTop,
+        onPressed: _changeScrollDirection,
         child: isTop ? const Icon(Icons.arrow_downward) : const Icon(Icons.arrow_upward),
       ),
     );
@@ -136,23 +136,14 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
   }
 
 
-  void _scrollToBottom() {
+  void _changeScrollDirection() {
+
     _scrollController.animateTo(
-      _scrollController.position.maxScrollExtent,
+      isTop ? _scrollController.position.maxScrollExtent : _scrollController.position.minScrollExtent,
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeIn,
     );
-
-  } 
-
-
-  void _scrollToTop(){
-    _scrollController.animateTo(
-      _scrollController.position.minScrollExtent,
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeIn,
-    );
-
+    
   }
 
 
