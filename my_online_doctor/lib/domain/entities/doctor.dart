@@ -36,6 +36,31 @@ class Doctor {
   GenderType get gender => _gender;
 
 
+  ///Modelo de datos
+  Doctor fromJson(Map<String, dynamic> json) {
+    _id = json['id'];
+    _firstName = json['firstName'];
+    _lastName = json['lastName'];
+    _specialties = json['specialties'];
+    _location = json['location'];
+    _photo = json['photo'];
+    _gender = json['gender'];
+
+    return this;
+  }
+
+
+  static Map<String, dynamic> toJson(Doctor model) => {
+    'id' : model._id,
+    'firstName' : model._firstName,
+    'lastName' : model._lastName,
+    'specialties' : model._specialties,
+    'location' : model._location,
+    'photo' : model._photo,
+    'gender' : model._gender
+  };
+
+
 
   ///Patron Factory
   static Doctor create(String id, String firstName, String lastName, List<SpecialtyType> specialties, String location,
