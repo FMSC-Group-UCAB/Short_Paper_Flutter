@@ -67,6 +67,7 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
         style: textStyleAppBar(),
         ),
         centerTitle: true,
+        backgroundColor: colorPrimary,
         // automaticallyImplyLeading: false, //Elimina el back button
       ),
       body: Column(
@@ -93,6 +94,7 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: colorPrimary,
         onPressed: _changeScrollDirection,
         child: isTop ? const Icon(Icons.arrow_downward) : const Icon(Icons.arrow_upward),
       ),
