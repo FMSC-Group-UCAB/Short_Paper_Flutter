@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_online_doctor/core/context_manager.dart';
+import 'package:my_online_doctor/core/injection_manager.dart';
 import 'package:my_online_doctor/domain/entities/doctor.dart';
 import 'package:my_online_doctor/domain/enumerations/gender_type_enum.dart';
 import 'package:my_online_doctor/domain/enumerations/specialty_type_enum.dart';
@@ -61,6 +63,8 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
   @override
   Widget build(BuildContext context) {
 
+    getIt<ContextManager>().screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Buscador de doctores',
@@ -77,7 +81,7 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
         Expanded(
           child: Container(
             padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
-            child: ListView.builder(
+            child: doctors.isNotEmpty ? ListView.builder(
               controller: _scrollController,
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
@@ -87,6 +91,12 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
                 
                 return _buildDoctor(doctor);
               }
+            ):  Center(
+              child: Image.asset(
+                'assets/images/no_doctor.png', 
+                width: getIt<ContextManager>().screenSize.width * 0.8,
+                height: getIt<ContextManager>().screenSize.height * 0.6, 
+              ),
             ),
           ),
         ),
