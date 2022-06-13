@@ -153,12 +153,13 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
     leading: Image.asset('assets/images/no_doctor.png',
     width: 50,
     height: 50,
+    fit: BoxFit.fill,
     ),
     // leading: const CircleAvatar(
     //   radius: 48,
     //   backgroundImage: NetworkImage('http://localhost:3000/api/doctors/image/doc1.jpg'),
     // ),
-    title: doctor.gender == 'M' ? Text('Dr. ${doctor.firstName} ${doctor.lastName}'): Text('Dra. ${doctor.firstName} ${doctor.lastName}'),
+    title: doctor.gender == 'M' ? Text('Dr. ${doctor.firstName}${doctor.lastName}'): Text('Dra. ${doctor.firstName} ${doctor.lastName}'),
     subtitle: _searchDoctorController.text != '' ? 
       Text(doctor.specialties.singleWhere((specialty) => specialty == _searchDoctorController.text.toUpperCase().trim())) 
       :Text(doctor.specialties[0]),
@@ -172,7 +173,9 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
       );
 
 
-  Future<void> _searchDoctor(String queryText) async{
+  Future<void> _searchDoctor(String queryText) async {
+
+    // _test(queryText);
     
     var doctorsList = await doctorRequest.fetchDoctors(queryText.toUpperCase().trim());
 
