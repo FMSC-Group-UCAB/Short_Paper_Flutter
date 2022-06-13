@@ -3,6 +3,7 @@ import 'package:my_online_doctor/ajustes.dart';
 import 'package:my_online_doctor/core/context_manager.dart';
 import 'package:my_online_doctor/core/injection_manager.dart';
 import 'package:my_online_doctor/ui/search_doctor/search_doctor_page.dart';
+import 'package:my_online_doctor/ui/styles/colors.dart';
 void main() {
 
   InjectionManager.setupInjections();
@@ -40,6 +41,7 @@ class MyHomePage extends StatelessWidget {
         builder: (context) => Scaffold(
       appBar: AppBar(
         title: const Text("Inicio"),
+        backgroundColor: colorPrimary,
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.settings),

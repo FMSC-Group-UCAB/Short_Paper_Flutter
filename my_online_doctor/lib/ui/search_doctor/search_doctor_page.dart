@@ -20,8 +20,9 @@ class SearchDoctorPage extends StatefulWidget {
 class _SearchDoctorPageState extends State<SearchDoctorPage> {
 
   bool isTop = true;
+  bool once = false;
 
-  final TextEditingController _searchDoctorController = TextEditingController();
+  final TextEditingController _searchDoctorController = TextEditingController(text: '');
   final ScrollController _scrollController = ScrollController();
 
   final DoctorRequest doctorRequest = DoctorRequest();
@@ -50,7 +51,7 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
 
     _scrollController.addListener(_scrollListener);
 
-    doctors2 = doctors;
+    // doctors2 = doctors;
   }
 
 
@@ -94,11 +95,14 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
     _buildDoctorSearchBar(),
     Expanded(
       child: FutureBuilder(
-        future: doctorRequest.getAllDoctors(),
+        future: doctorRequest.fetchDoctors(''),
         builder: (BuildContext context, AsyncSnapshot<List<Doctor>> snapshot) {
-          if(snapshot.hasData){
+          if(snapshot.hasData && !once){
             doctors = snapshot.data!;
             doctors2 = snapshot.data!;
+            once = true;
+            return _search();
+          }else if(once){
             return _search();
           }else if(snapshot.hasError){
             return Center(child: Text(snapshot.error.toString()));
@@ -138,10 +142,11 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
 
 
   Widget _buildDoctor(Doctor doctor) =>  ListTile(
-    leading: const CircleAvatar(
-      radius: 48,
-      backgroundImage: NetworkImage('https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg'),
-    ),
+    leading: Image.asset('assets/images/no_doctor.png'),
+    // leading: const CircleAvatar(
+    //   radius: 48,
+    //   backgroundImage: NetworkImage('http://localhost:3000/api/doctors/image/doc1.jpg'),
+    // ),
     title: doctor.gender == 'M' ? Text('Dr. ${doctor.firstName} ${doctor.lastName}'): Text('Dra. ${doctor.firstName} ${doctor.lastName}'),
     subtitle: Text(doctor.specialties[0]),
   );
@@ -155,13 +160,13 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
 
   void _searchDoctor(String queryText) {
     final doctorSuggestions = doctors.where((doctor) {
-      // final firstName = doctor.firstName.toLowerCase();
-      // final lastName = doctor.lastName.toLowerCase();
+      final firstName = doctor.firstName.toLowerCase();
+      final lastName = doctor.lastName.toLowerCase();
       final specialty = doctor.specialties[0].toLowerCase();
       final input = queryText.toLowerCase();
 
-      // return firstName.contains(input) || lastName.contains(input) || specialty.contains(input);
-      return specialty.contains(input);
+      return firstName.contains(input) || lastName.contains(input) || specialty.contains(input);
+      // return specialty.contains(input);
 
     }).toList();
 
