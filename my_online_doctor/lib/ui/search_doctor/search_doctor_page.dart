@@ -144,7 +144,7 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
     title: doctor.gender == 'M' ? Text('Dr. ${doctor.firstName} ${doctor.lastName}'): Text('Dra. ${doctor.firstName} ${doctor.lastName}'),
     subtitle: _searchDoctorController.text != '' ? 
       Text(doctor.specialties.singleWhere((specialty) => specialty == _searchDoctorController.text.toUpperCase().trim())) 
-      :Text(doctor.specialties[0]),
+      : (doctor.specialties.length > 1 ? Text(doctor.specialties[0] + ',  ' + doctor.specialties[1]): Text(doctor.specialties[0])),
   );
 
 
@@ -169,7 +169,7 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
 
     _scrollController.animateTo(
       isTop ? _scrollController.position.maxScrollExtent : _scrollController.position.minScrollExtent,
-      duration: const Duration(seconds: 3),
+      duration: const Duration(milliseconds: 2500),
       curve: Curves.easeIn,
     );
     
