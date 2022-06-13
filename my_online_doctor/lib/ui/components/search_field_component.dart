@@ -60,7 +60,7 @@ class _SearchFieldComponentState extends State<SearchFieldComponent> {
           border: InputBorder.none,
         ),
         style: style,
-        onChanged: widget.onChanged,
+        onSubmitted: widget.onChanged,
       ),
     );
   }

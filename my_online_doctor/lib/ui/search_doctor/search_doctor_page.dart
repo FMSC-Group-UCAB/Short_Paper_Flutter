@@ -27,21 +27,23 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
 
   final DoctorRequest doctorRequest = DoctorRequest();
 
-  List<Doctor> doctors = [
-    Doctor(id:1, firstName: 'Juan', lastName: 'Perez', specialties: ['Cardiologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'M'),
-    Doctor(id:2, firstName: 'Maria', lastName: 'Juana', specialties: ['Oftalmologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'F'),
-    Doctor(id:1, firstName: 'Juan', lastName: 'Perez', specialties: ['Cardiologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'M'),
-    Doctor(id:2, firstName: 'Maria', lastName: 'Juana', specialties: ['Oftalmologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'F'),
-    Doctor(id:1, firstName: 'Juan', lastName: 'Perez', specialties: ['Cardiologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'M'),
-    Doctor(id:2, firstName: 'Maria', lastName: 'Juana', specialties: ['Oftalmologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'F'),
-    Doctor(id:1, firstName: 'Juan', lastName: 'Perez', specialties: ['Cardiologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'M'),
-    Doctor(id:2, firstName: 'Maria', lastName: 'Juana', specialties: ['Oftalmologia'],  photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'F'),
-    Doctor(id:1, firstName: 'Juan', lastName: 'Perez', specialties: ['Cardiologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'M'),
-    Doctor(id:2, firstName: 'Maria', lastName: 'Juana', specialties: ['Oftalmologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg',  gender:'F'),
-    Doctor(id:1, firstName: 'Juan', lastName: 'Perez', specialties: ['Cardiologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'M'),
-    Doctor(id:2, firstName: 'Maria', lastName: 'Juana', specialties: ['Oftalmologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'F'),
+  List<Doctor> doctors = [];
+
+  // List<Doctor> doctors = [
+  //   Doctor(id:1, firstName: 'Juan', lastName: 'Perez', specialties: ['Cardiologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'M'),
+  //   Doctor(id:2, firstName: 'Maria', lastName: 'Juana', specialties: ['Oftalmologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'F'),
+  //   Doctor(id:1, firstName: 'Juan', lastName: 'Perez', specialties: ['Cardiologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'M'),
+  //   Doctor(id:2, firstName: 'Maria', lastName: 'Juana', specialties: ['Oftalmologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'F'),
+  //   Doctor(id:1, firstName: 'Juan', lastName: 'Perez', specialties: ['Cardiologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'M'),
+  //   Doctor(id:2, firstName: 'Maria', lastName: 'Juana', specialties: ['Oftalmologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'F'),
+  //   Doctor(id:1, firstName: 'Juan', lastName: 'Perez', specialties: ['Cardiologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'M'),
+  //   Doctor(id:2, firstName: 'Maria', lastName: 'Juana', specialties: ['Oftalmologia'],  photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'F'),
+  //   Doctor(id:1, firstName: 'Juan', lastName: 'Perez', specialties: ['Cardiologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'M'),
+  //   Doctor(id:2, firstName: 'Maria', lastName: 'Juana', specialties: ['Oftalmologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg',  gender:'F'),
+  //   Doctor(id:1, firstName: 'Juan', lastName: 'Perez', specialties: ['Cardiologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'M'),
+  //   Doctor(id:2, firstName: 'Maria', lastName: 'Juana', specialties: ['Oftalmologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'F'),
    
-  ];
+  // ];
 
   late List<Doctor> doctors2;
 
@@ -50,6 +52,8 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
     super.initState();
 
     _scrollController.addListener(_scrollListener);
+
+    _searchDoctor('');
 
     // doctors2 = doctors;
   }
@@ -92,26 +96,30 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
   Widget _body() => Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-    _buildDoctorSearchBar(),
-    Expanded(
-      child: FutureBuilder(
-        future: doctorRequest.fetchDoctors(''),
-        builder: (BuildContext context, AsyncSnapshot<List<Doctor>> snapshot) {
-          if(snapshot.hasData && !once){
-            doctors = snapshot.data!;
-            doctors2 = snapshot.data!;
-            once = true;
-            return _search();
-          }else if(once){
-            return _search();
-          }else if(snapshot.hasError){
-            return Center(child: Text(snapshot.error.toString()));
-          }else{
-            return const Center(child: CircularProgressIndicator());
-          }
-        },
+      _buildDoctorSearchBar(),
+      // _searchButton(),
+      Expanded(
+        child: _search()
       ),
-    ),
+      // Expanded(
+      //   child: FutureBuilder(
+      //     future: doctorRequest.fetchDoctors(''),
+      //     builder: (BuildContext context, AsyncSnapshot<List<Doctor>> snapshot) {
+      //       if(snapshot.hasData && !once){
+      //         doctors = snapshot.data!;
+      //         doctors2 = snapshot.data!;
+      //         once = true;
+      //         return _search();
+      //       }else if(once){
+      //         return _search();
+      //       }else if(snapshot.hasError){
+      //         return Center(child: Text(snapshot.error.toString()));
+      //       }else{
+      //         return const Center(child: CircularProgressIndicator());
+      //       }
+      //     },
+      //   ),
+      // ),
 
     ],
   );
@@ -142,40 +150,56 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
 
 
   Widget _buildDoctor(Doctor doctor) =>  ListTile(
-    leading: Image.asset('assets/images/no_doctor.png'),
+    leading: Image.asset('assets/images/no_doctor.png',
+    width: 50,
+    height: 50,
+    ),
     // leading: const CircleAvatar(
     //   radius: 48,
     //   backgroundImage: NetworkImage('http://localhost:3000/api/doctors/image/doc1.jpg'),
     // ),
     title: doctor.gender == 'M' ? Text('Dr. ${doctor.firstName} ${doctor.lastName}'): Text('Dra. ${doctor.firstName} ${doctor.lastName}'),
-    subtitle: Text(doctor.specialties[0]),
+    subtitle: _searchDoctorController.text != '' ? 
+      Text(doctor.specialties.singleWhere((specialty) => specialty == _searchDoctorController.text.toUpperCase().trim())) 
+      :Text(doctor.specialties[0]),
   );
+
 
   Widget _buildDoctorSearchBar() => SearchFieldComponent(
-    text: _searchDoctorController.text, 
-    onChanged: _searchDoctor, 
-    hintText: 'Buscar doctores por especialidad'
-  );
+        text: _searchDoctorController.text, 
+        onChanged: _searchDoctor, 
+        hintText: 'Buscar doctores por especialidad'
+      );
 
 
-  void _searchDoctor(String queryText) {
-    final doctorSuggestions = doctors.where((doctor) {
-      final firstName = doctor.firstName.toLowerCase();
-      final lastName = doctor.lastName.toLowerCase();
-      final specialty = doctor.specialties[0].toLowerCase();
-      final input = queryText.toLowerCase();
-
-      return firstName.contains(input) || lastName.contains(input) || specialty.contains(input);
-      // return specialty.contains(input);
-
-    }).toList();
+  Future<void> _searchDoctor(String queryText) async{
+    
+    var doctorsList = await doctorRequest.fetchDoctors(queryText.toUpperCase().trim());
 
     setState(() {
-      doctors = queryText.isEmpty ? doctors2 : doctorSuggestions;
+      doctors = doctorsList;
       _searchDoctorController.text = queryText;
     });
-
   }
+
+  // void _searchDoctor(String queryText) {
+  //   final doctorSuggestions = doctors.where((doctor) {
+  //     // final firstName = doctor.firstName.toLowerCase();
+  //     // final lastName = doctor.lastName.toLowerCase();
+  //     final specialty = doctor.specialties[0].toLowerCase();
+  //     final input = queryText.toLowerCase();
+
+  //     // return firstName.contains(input) || lastName.contains(input) || specialty.contains(input);
+  //     return specialty.contains(input);
+
+  //   }).toList();
+
+  //   setState(() {
+  //     doctors = queryText.isEmpty ? doctors2 : doctorSuggestions;
+  //     _searchDoctorController.text = queryText;
+  //   });
+
+  // }
 
 
   void _changeScrollDirection() {
