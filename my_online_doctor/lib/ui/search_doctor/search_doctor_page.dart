@@ -101,7 +101,7 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
 
               case ConnectionState.waiting:
               case ConnectionState.none:
-                return const Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator(color: colorPrimary,));
 
               case ConnectionState.done:
               case ConnectionState.active:
