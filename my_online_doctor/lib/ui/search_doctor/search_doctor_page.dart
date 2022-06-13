@@ -131,15 +131,16 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
 
 
   Widget _buildDoctor(Doctor doctor) =>  ListTile(
-    leading: Image.asset('assets/images/no_doctor_found.png',
-    width: 50,
-    height: 50,
-    fit: BoxFit.fill,
+    leading: Container(
+      margin: const EdgeInsets.only(left: 16, right: 16),
+      child: ClipOval(
+        child: Image.network('http://10.0.2.2:3000/api/doctors/image/doc1.jpg',
+        width: 55,
+        height: 55,
+        fit: BoxFit.fill,
+        ),
+      ),
     ),
-    // leading: const CircleAvatar(
-    //   radius: 48,
-    //   backgroundImage: NetworkImage('http://localhost:3000/api/doctors/image/doc1.jpg'),
-    // ),
     title: doctor.gender == 'M' ? Text('Dr. ${doctor.firstName} ${doctor.lastName}'): Text('Dra. ${doctor.firstName} ${doctor.lastName}'),
     subtitle: _searchDoctorController.text != '' ? 
       Text(doctor.specialties.singleWhere((specialty) => specialty == _searchDoctorController.text.toUpperCase().trim())) 
