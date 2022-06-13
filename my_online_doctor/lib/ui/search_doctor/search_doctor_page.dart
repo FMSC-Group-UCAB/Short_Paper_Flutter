@@ -44,7 +44,8 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
 
   void _scrollListener(){
     if(_scrollController.position.atEdge){
-      setState(() => isTop = !isTop); 
+      _scrollController.position.pixels == 0 ? isTop = true : isTop = false;
+      setState(() => isTop); 
     }
 
   }
@@ -167,7 +168,7 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
 
     _scrollController.animateTo(
       isTop ? _scrollController.position.maxScrollExtent : _scrollController.position.minScrollExtent,
-      duration: const Duration(milliseconds: 800),
+      duration: const Duration(seconds: 3),
       curve: Curves.easeIn,
     );
     
