@@ -8,6 +8,7 @@ import 'package:my_online_doctor/domain/enumerations/gender_type_enum.dart';
 import 'package:my_online_doctor/domain/enumerations/specialty_type_enum.dart';
 import 'package:my_online_doctor/request/doctor_request.dart';
 import 'package:my_online_doctor/ui/components/search_field_component.dart';
+import 'package:my_online_doctor/ui/components/show_error_component.dart';
 import 'package:my_online_doctor/ui/styles/colors.dart';
 import 'package:my_online_doctor/ui/styles/themes.dart';
 
@@ -88,25 +89,23 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
 
             if(snapshot.hasError){
-              return Center(
-                child: Text('Error: ${snapshot.error}'),
-              );
+              switch(snapshot.error){
+                case 'No Doctors Found':
+                  return const ShowErrorComponent(errorImagePath:'assets/images/no_doctor_found.png');
+                default:
+                  return const ShowErrorComponent(errorImagePath: 'assets/images/server_error.png');
+              }
             } 
 
             switch(snapshot.connectionState) {
 
               case ConnectionState.waiting:
+              case ConnectionState.none:
                 return const Center(child: CircularProgressIndicator());
 
               case ConnectionState.done:
-                return _buildDoctorsList(snapshot.data);
-              case ConnectionState.none:
-                // TODO: Handle this case.
-                return const Center(child: Text('None'));
               case ConnectionState.active:
-                // TODO: Handle this case.
-                return const Center(child: Text('Active'));
-              
+                return _buildDoctorsList(snapshot.data);
             }
           }
         ),
@@ -117,7 +116,7 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
 
   Widget _buildDoctorsList(List<Doctor> doctors) => Container(
         padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
-        child: doctors.isNotEmpty ? ListView.builder(
+        child:  ListView.builder(
           controller: _scrollController,
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
@@ -127,12 +126,6 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
             
             return _buildDoctor(doctor);
           }
-        ):  Center(
-          child: Image.asset(
-            'assets/images/no_doctor.png', 
-            width: getIt<ContextManager>().screenSize.width * 0.8,
-            height: getIt<ContextManager>().screenSize.height * 0.6, 
-          ),
         ),
       );
 
@@ -140,7 +133,7 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
 
 
   Widget _buildDoctor(Doctor doctor) =>  ListTile(
-    leading: Image.asset('assets/images/no_doctor.png',
+    leading: Image.asset('assets/images/no_doctor_found.png',
     width: 50,
     height: 50,
     fit: BoxFit.fill,
@@ -190,5 +183,7 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
 
 
 }
+
+
 
 

@@ -23,8 +23,11 @@ class DoctorRequest {
 
       return doctors;
 
+    } else if(response.statusCode == 400) {
+      throw 'No Doctors Found';
+      
     } else {
-      throw 'No se pudieron obtener los doctores';
+      throw 'Server Error';
     }
 
   }

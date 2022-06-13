@@ -1,0 +1,29 @@
+import 'package:flutter/material.dart';
+import 'package:my_online_doctor/core/context_manager.dart';
+import 'package:my_online_doctor/core/injection_manager.dart';
+
+class ShowErrorComponent extends StatefulWidget {
+
+final String errorImagePath;
+
+  const ShowErrorComponent({
+    Key? key,
+    required this.errorImagePath,
+  }) : super(key: key);
+
+  @override
+  State<ShowErrorComponent> createState() => _ShowErrorComponentState();
+}
+
+class _ShowErrorComponentState extends State<ShowErrorComponent> {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Image.asset(
+        widget.errorImagePath, 
+        width: getIt<ContextManager>().screenSize.width * 0.8,
+        height: getIt<ContextManager>().screenSize.height * 0.6, 
+      ),
+    );
+  }
+}
