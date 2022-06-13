@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:my_online_doctor/core/context_manager.dart';
 import 'package:my_online_doctor/core/injection_manager.dart';
@@ -27,25 +29,9 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
 
   final DoctorRequest doctorRequest = DoctorRequest();
 
-  List<Doctor> doctors = [];
+  late Stream<List<Doctor>> doctorStream;
 
-  // List<Doctor> doctors = [
-  //   Doctor(id:1, firstName: 'Juan', lastName: 'Perez', specialties: ['Cardiologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'M'),
-  //   Doctor(id:2, firstName: 'Maria', lastName: 'Juana', specialties: ['Oftalmologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'F'),
-  //   Doctor(id:1, firstName: 'Juan', lastName: 'Perez', specialties: ['Cardiologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'M'),
-  //   Doctor(id:2, firstName: 'Maria', lastName: 'Juana', specialties: ['Oftalmologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'F'),
-  //   Doctor(id:1, firstName: 'Juan', lastName: 'Perez', specialties: ['Cardiologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'M'),
-  //   Doctor(id:2, firstName: 'Maria', lastName: 'Juana', specialties: ['Oftalmologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'F'),
-  //   Doctor(id:1, firstName: 'Juan', lastName: 'Perez', specialties: ['Cardiologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'M'),
-  //   Doctor(id:2, firstName: 'Maria', lastName: 'Juana', specialties: ['Oftalmologia'],  photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'F'),
-  //   Doctor(id:1, firstName: 'Juan', lastName: 'Perez', specialties: ['Cardiologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'M'),
-  //   Doctor(id:2, firstName: 'Maria', lastName: 'Juana', specialties: ['Oftalmologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg',  gender:'F'),
-  //   Doctor(id:1, firstName: 'Juan', lastName: 'Perez', specialties: ['Cardiologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'M'),
-  //   Doctor(id:2, firstName: 'Maria', lastName: 'Juana', specialties: ['Oftalmologia'], photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Steen_Doctor_and_His_Patient.jpg/330px-Steen_Doctor_and_His_Patient.jpg', gender: 'F'),
-   
-  // ];
 
-  late List<Doctor> doctors2;
 
   @override
   void initState() {
@@ -55,7 +41,6 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
 
     _searchDoctor('');
 
-    // doctors2 = doctors;
   }
 
 
@@ -97,35 +82,40 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
       _buildDoctorSearchBar(),
-      // _searchButton(),
       Expanded(
-        child: _search()
-      ),
-      // Expanded(
-      //   child: FutureBuilder(
-      //     future: doctorRequest.fetchDoctors(''),
-      //     builder: (BuildContext context, AsyncSnapshot<List<Doctor>> snapshot) {
-      //       if(snapshot.hasData && !once){
-      //         doctors = snapshot.data!;
-      //         doctors2 = snapshot.data!;
-      //         once = true;
-      //         return _search();
-      //       }else if(once){
-      //         return _search();
-      //       }else if(snapshot.hasError){
-      //         return Center(child: Text(snapshot.error.toString()));
-      //       }else{
-      //         return const Center(child: CircularProgressIndicator());
-      //       }
-      //     },
-      //   ),
-      // ),
+        child: StreamBuilder(
+          stream: doctorStream,
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
 
+            if(snapshot.hasError){
+              return Center(
+                child: Text('Error: ${snapshot.error}'),
+              );
+            } 
+
+            switch(snapshot.connectionState) {
+
+              case ConnectionState.waiting:
+                return const Center(child: CircularProgressIndicator());
+
+              case ConnectionState.done:
+                return _buildDoctorsList(snapshot.data);
+              case ConnectionState.none:
+                // TODO: Handle this case.
+                return const Center(child: Text('None'));
+              case ConnectionState.active:
+                // TODO: Handle this case.
+                return const Center(child: Text('Active'));
+              
+            }
+          }
+        ),
+      ),
     ],
   );
 
 
-  Widget _search() => Container(
+  Widget _buildDoctorsList(List<Doctor> doctors) => Container(
         padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
         child: doctors.isNotEmpty ? ListView.builder(
           controller: _scrollController,
@@ -159,7 +149,7 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
     //   radius: 48,
     //   backgroundImage: NetworkImage('http://localhost:3000/api/doctors/image/doc1.jpg'),
     // ),
-    title: doctor.gender == 'M' ? Text('Dr. ${doctor.firstName}${doctor.lastName}'): Text('Dra. ${doctor.firstName} ${doctor.lastName}'),
+    title: doctor.gender == 'M' ? Text('Dr. ${doctor.firstName} ${doctor.lastName}'): Text('Dra. ${doctor.firstName} ${doctor.lastName}'),
     subtitle: _searchDoctorController.text != '' ? 
       Text(doctor.specialties.singleWhere((specialty) => specialty == _searchDoctorController.text.toUpperCase().trim())) 
       :Text(doctor.specialties[0]),
@@ -168,48 +158,31 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
 
   Widget _buildDoctorSearchBar() => SearchFieldComponent(
         text: _searchDoctorController.text, 
-        onChanged: _searchDoctor, 
+        onChanged: _searchDoctor , 
         hintText: 'Buscar doctores por especialidad'
       );
 
 
-  Future<void> _searchDoctor(String queryText) async {
-
-    // _test(queryText);
+  void _searchDoctor(String queryText) {
     
-    var doctorsList = await doctorRequest.fetchDoctors(queryText.toUpperCase().trim());
-
-    setState(() {
-      doctors = doctorsList;
-      _searchDoctorController.text = queryText;
-    });
+    setState(() => doctorStream = _searchDoctor2(queryText));
   }
 
-  // void _searchDoctor(String queryText) {
-  //   final doctorSuggestions = doctors.where((doctor) {
-  //     // final firstName = doctor.firstName.toLowerCase();
-  //     // final lastName = doctor.lastName.toLowerCase();
-  //     final specialty = doctor.specialties[0].toLowerCase();
-  //     final input = queryText.toLowerCase();
+  Stream<List<Doctor>> _searchDoctor2(String queryText)async* {
 
-  //     // return firstName.contains(input) || lastName.contains(input) || specialty.contains(input);
-  //     return specialty.contains(input);
+    var doctorsList = await doctorRequest.fetchDoctors(queryText.toUpperCase().trim());
 
-  //   }).toList();
-
-  //   setState(() {
-  //     doctors = queryText.isEmpty ? doctors2 : doctorSuggestions;
-  //     _searchDoctorController.text = queryText;
-  //   });
-
-  // }
+    _searchDoctorController.text = queryText;
+    
+    yield doctorsList;
+  }
 
 
   void _changeScrollDirection() {
 
     _scrollController.animateTo(
       isTop ? _scrollController.position.maxScrollExtent : _scrollController.position.minScrollExtent,
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 800),
       curve: Curves.easeIn,
     );
     
