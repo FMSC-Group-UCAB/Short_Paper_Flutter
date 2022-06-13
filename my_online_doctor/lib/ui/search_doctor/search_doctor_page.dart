@@ -1,12 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:my_online_doctor/application/streams/doctor_stream.dart';
 import 'package:my_online_doctor/core/context_manager.dart';
 import 'package:my_online_doctor/core/injection_manager.dart';
 import 'package:my_online_doctor/domain/entities/doctor.dart';
-import 'package:my_online_doctor/domain/enumerations/gender_type_enum.dart';
-import 'package:my_online_doctor/domain/enumerations/specialty_type_enum.dart';
-import 'package:my_online_doctor/request/doctor_request.dart';
 import 'package:my_online_doctor/ui/components/search_field_component.dart';
 import 'package:my_online_doctor/ui/components/show_error_component.dart';
 import 'package:my_online_doctor/ui/styles/colors.dart';
@@ -23,12 +21,11 @@ class SearchDoctorPage extends StatefulWidget {
 class _SearchDoctorPageState extends State<SearchDoctorPage> {
 
   bool isTop = true;
-  bool once = false;
 
   final TextEditingController _searchDoctorController = TextEditingController(text: '');
   final ScrollController _scrollController = ScrollController();
 
-  final DoctorRequest doctorRequest = DoctorRequest();
+  
 
   late Stream<List<Doctor>> doctorStream;
 
@@ -157,18 +154,13 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
 
 
   void _searchDoctor(String queryText) {
-    
-    setState(() => doctorStream = _searchDoctor2(queryText));
-  }
-
-  Stream<List<Doctor>> _searchDoctor2(String queryText)async* {
-
-    var doctorsList = await doctorRequest.fetchDoctors(queryText.toUpperCase().trim());
 
     _searchDoctorController.text = queryText;
     
-    yield doctorsList;
+    setState(() => doctorStream = DoctorStream.searchDoctor(queryText));
   }
+
+  
 
 
   void _changeScrollDirection() {
