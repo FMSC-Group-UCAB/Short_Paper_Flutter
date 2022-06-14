@@ -3,6 +3,11 @@ import 'package:my_online_doctor/core/context_manager.dart';
 import 'package:my_online_doctor/core/injection_manager.dart';
 import 'package:my_online_doctor/ui/styles/colors.dart';
 
+///SearchFieldComponent: Component that shows a search field.
+///
+///[onChanged]: Function that is called when the text in the search field changes.
+///[hintText]: Text to show in the search field as hint text.
+///[textInputType]: The text in the search field that has been added by the user.
 class SearchFieldComponent extends StatefulWidget {
   final String text;
   final ValueChanged<String> onChanged;

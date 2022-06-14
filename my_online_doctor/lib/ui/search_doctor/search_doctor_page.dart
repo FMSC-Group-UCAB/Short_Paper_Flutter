@@ -10,6 +10,7 @@ import 'package:my_online_doctor/ui/components/show_error_component.dart';
 import 'package:my_online_doctor/ui/styles/colors.dart';
 import 'package:my_online_doctor/ui/styles/themes.dart';
 
+///SearchDoctorPage: This class is used to manage the UI of the doctors search.
 class SearchDoctorPage extends StatefulWidget {
 
 
@@ -25,10 +26,7 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
   final TextEditingController _searchDoctorController = TextEditingController(text: '');
   final ScrollController _scrollController = ScrollController();
 
-  
-
   late Stream<List<Doctor>> doctorStream;
-
 
 
   @override
@@ -37,11 +35,13 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
 
     _scrollController.addListener(_scrollListener);
 
+    //Get all doctors for the first time.
     _searchDoctor('');
 
   }
 
 
+  /// This function [_scrollListener] is used to keep listening the position of the [_scrollController]
   void _scrollListener(){
     if(_scrollController.position.atEdge){
       _scrollController.position.pixels == 0 ? isTop = true : isTop = false;
@@ -64,7 +64,6 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
         ),
         centerTitle: true,
         backgroundColor: colorPrimary,
-        // automaticallyImplyLeading: false, //Elimina el back button
       ),
       body: _body(),
       floatingActionButton: FloatingActionButton(
@@ -77,6 +76,7 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
   }
 
 
+  /// This function [_body] is used to manage the body of the page.
   Widget _body() => Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
@@ -112,6 +112,8 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
   );
 
 
+  /// This function [_buildDoctorsList] is used to build the list of doctors.
+  /// [doctors] is the list of doctors.
   Widget _buildDoctorsList(List<Doctor> doctors) => Container(
         padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
         child:  ListView.builder(
@@ -129,7 +131,8 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
 
 
 
-
+  /// This function [_buildDoctor] is used to build a tile of the doctor in the List of Doctors.
+  /// [doctor] is the doctor to build.
   Widget _buildDoctor(Doctor doctor) =>  ListTile(
     leading: Container(
       margin: const EdgeInsets.only(left: 16, right: 16),
@@ -148,6 +151,7 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
   );
 
 
+  /// This function [_buildDoctorSearchBar] is used to build the search bar of the doctors.
   Widget _buildDoctorSearchBar() => SearchFieldComponent(
         text: _searchDoctorController.text, 
         onChanged: _searchDoctor , 
@@ -155,6 +159,8 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
       );
 
 
+  /// This function [_searchDoctor] is used to search the doctors.
+  /// [queryText] is the text to search, based on the specialties.
   void _searchDoctor(String queryText) {
 
     _searchDoctorController.text = queryText;
@@ -163,8 +169,7 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
   }
 
   
-
-
+  /// This function [_changeScrollDirection] is used to change the scroll direction of the [_scrollController].
   void _changeScrollDirection() {
 
     _scrollController.animateTo(
@@ -172,7 +177,6 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
       duration: const Duration(milliseconds: 2500),
       curve: Curves.easeIn,
     );
-    
   }
 
 
