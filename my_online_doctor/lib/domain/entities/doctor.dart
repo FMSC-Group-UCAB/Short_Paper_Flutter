@@ -1,6 +1,4 @@
-import 'package:my_online_doctor/domain/enumerations/gender_type_enum.dart';
-import 'package:my_online_doctor/domain/enumerations/specialty_type_enum.dart';
-
+///Doctor: Clase que representa un doctor.
 class Doctor {
 
   late final int id;
@@ -13,18 +11,6 @@ class Doctor {
 
 
   ///Constructor
-  // Doctor(String id, String firstName, String lastName, List<SpecialtyType> specialties, String location,
-  // String photo, GenderType gender) {
-
-  //   _id = id;
-  //   _firstName = firstName;
-  //   _lastName = lastName;
-  //   _specialties = specialties;
-  //   _location = location;
-  //   _photo = photo;
-  //   _gender = gender;
-  // }
-
   Doctor({
     required this.id,
     required this.firstName,
@@ -37,61 +23,64 @@ class Doctor {
 
 
   ///Getters
-  // String get id => _id;
-  // String get firstName => _firstName;
-  // String get lastName => _lastName;
-  // List<SpecialtyType> get specialties => _specialties;
-  // String get location => _location;
-  // String get photo => _photo;
-  // GenderType get gender => _gender;
+  int get getId => id;
+  String get getFirstName => firstName;
+  String get getLastName => lastName;
+  List<dynamic> get getSpecialties => specialties;
+  // String get location => location;
+  String get getPhoto => photo;
+  String get getGender => gender;
 
 
   ///Modelo de datos
-  // factory Doctor.fromJson(Map<String, dynamic> json) {
-  //   _id = json['id'];
-  //   _firstName = json['firstName'];
-  //   _lastName = json['lastName'];
-  //   _specialties = json['specialties'];
-  //   _location = json['location'];
-  //   _photo = json['photo'];
-  //   _gender = json['gender'];
-
-  //   return this;
-  // }
-
+  ///Decorder del json para los objetos de tipo [Doctor]
   factory Doctor.fromJson(Map<String, dynamic> json) {
 
-    return Doctor(
-      id:  json['id'],
-      firstName:  json['firstName'],
-      lastName:  json['lastName'],
-      specialties:  json['specialties'],
+    return Doctor.create(
+      json['id'],
+      json['firstName'],
+      json['lastName'],
+      json['specialties'],
       // location:  json['location'],
-      photo:  json['image'],
-      gender:  json['sex'],
+      json['image'],
+      json['sex'],
     );
     
-
   }
 
-
-  // static Map<String, dynamic> toJson(Doctor model) => {
-  //   'id' : model._id,
-  //   'firstName' : model._firstName,
-  //   'lastName' : model._lastName,
-  //   'specialties' : model._specialties,
-  //   'location' : model._location,
-  //   'photo' : model._photo,
-  //   'gender' : model._gender
-  // };
+  ///Encoder del json para los objetos de tipo [Doctor]
+  static Map<String, dynamic> toJson(Doctor model) => {
+    'id' : model.id,
+    'firstName' : model.firstName,
+    'lastName' : model.lastName,
+    'specialties' : model.specialties,
+    // 'location' : model.location,
+    'photo' : model.photo,
+    'gender' : model.gender
+  };
 
 
 
   ///Patron Factory
-  // static Doctor create(String id, String firstName, String lastName, List<SpecialtyType> specialties, String location,
-  // String photo, GenderType gender) {
+  ///Crea una instancia de [Doctor]
+  ///[id]: Es un [int] que representa el identificador del doctor.
+  ///[firstName]: Es un [String] que representa el primer nombre del doctor.
+  ///[lastName]: Es un [String] que representa el apellido del doctor.
+  ///[specialties]: Es un [List<dynamic>] que representa las especialidades del doctor.
+  ///[location]: Es un [String] que representa la ubicación del doctor.
+  ///[photo]: Es un [String] que representa la foto del doctor.
+  ///[gender]: Es un [String] que representa el genero de un doctor.
+  static Doctor create(int id, String firstName, String lastName, List<dynamic> specialties,
+  String photo, String gender) {
 
-  //   return Doctor(id, firstName, lastName, specialties, location, photo, gender);
-  // }
+    return Doctor(
+    id: id, 
+    firstName: firstName, 
+    lastName: lastName, 
+    specialties: specialties, 
+    // location: location, 
+    photo: photo, 
+    gender: gender);
+  }
 
 }
