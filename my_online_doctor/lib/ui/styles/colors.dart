@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+///This file is used to manage the colors of the application.
+
 const colorPrimary = Color.fromARGB(255, 41, 205, 191);
 const colorSecondary = Color(0xFFcecece);
 const colorActive = Color.fromARGB(255, 4, 159, 255);
