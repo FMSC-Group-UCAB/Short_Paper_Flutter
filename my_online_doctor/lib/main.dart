@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_doctor/ajustes.dart';
 import 'package:my_online_doctor/core/context_manager.dart';
 import 'package:my_online_doctor/core/injection_manager.dart';
 import 'package:my_online_doctor/ui/search_doctor/search_doctor_page.dart';
@@ -57,11 +56,5 @@ class MyHomePage extends StatelessWidget {
     
   }
 
-
-  void _mostrarAjustes(BuildContext context) {
-    context = getIt<ContextManager>().context;
-    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => SearchDoctorPage())
-    );
-  }
 
 }
