@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_doctor/ui/styles/colors.dart';
+import 'package:my_online_doctor/infrastructure/ui/styles/colors.dart';
 
 
 /// This file is used to manage the theme of the application.

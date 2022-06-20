@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_doctor/core/context_manager.dart';
-import 'package:my_online_doctor/core/injection_manager.dart';
-import 'package:my_online_doctor/ui/search_doctor/search_doctor_page.dart';
-import 'package:my_online_doctor/ui/styles/colors.dart';
+import 'package:my_online_doctor/infrastructure/core/context_manager.dart';
+import 'package:my_online_doctor/infrastructure/core/injection_manager.dart';
+import 'package:my_online_doctor/infrastructure/ui/search_doctor/search_doctor_page.dart';
+import 'package:my_online_doctor/infrastructure/ui/styles/colors.dart';
 void main() {
 
   InjectionManager.setupInjections();

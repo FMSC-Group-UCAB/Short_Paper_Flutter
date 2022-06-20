@@ -1,5 +1,5 @@
 import 'package:my_online_doctor/domain/entities/doctor.dart';
-import 'package:my_online_doctor/request/doctor_request.dart';
+import 'package:my_online_doctor/infrastructure/request/doctor_request.dart';
 
 ///DoctorStream: This class is used to manage the doctor stream.  
 class DoctorStream {

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_doctor/core/context_manager.dart';
-import 'package:my_online_doctor/core/injection_manager.dart';
-import 'package:my_online_doctor/ui/styles/colors.dart';
-
+import 'package:my_online_doctor/infrastructure/core/context_manager.dart';
+import 'package:my_online_doctor/infrastructure/core/injection_manager.dart';
+import 'package:my_online_doctor/infrastructure/ui/styles/colors.dart';
 ///SearchFieldComponent: Component that shows a search field.
 ///
 ///[onChanged]: Function that is called when the text in the search field changes.

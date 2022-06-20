@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_doctor/core/context_manager.dart';
-import 'package:my_online_doctor/core/injection_manager.dart';
+import 'package:my_online_doctor/infrastructure/core/context_manager.dart';
+import 'package:my_online_doctor/infrastructure/core/injection_manager.dart';
 
 ///ShowErrorComponent: Component that shows an error image with the right configuration.
 

@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:my_online_doctor/application/streams/doctor_stream.dart';
-import 'package:my_online_doctor/core/context_manager.dart';
-import 'package:my_online_doctor/core/injection_manager.dart';
+import 'package:my_online_doctor/infrastructure/core/context_manager.dart';
+import 'package:my_online_doctor/infrastructure/core/injection_manager.dart';
 import 'package:my_online_doctor/domain/entities/doctor.dart';
-import 'package:my_online_doctor/ui/components/search_field_component.dart';
-import 'package:my_online_doctor/ui/components/show_error_component.dart';
-import 'package:my_online_doctor/ui/styles/colors.dart';
-import 'package:my_online_doctor/ui/styles/themes.dart';
+import 'package:my_online_doctor/infrastructure/ui/components/search_field_component.dart';
+import 'package:my_online_doctor/infrastructure/ui/components/show_error_component.dart';
+import 'package:my_online_doctor/infrastructure/ui/styles/colors.dart';
+import 'package:my_online_doctor/infrastructure/ui/styles/themes.dart';
 
 ///SearchDoctorPage: This class is used to manage the UI of the doctors search.
 class SearchDoctorPage extends StatefulWidget {
