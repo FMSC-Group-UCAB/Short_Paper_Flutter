@@ -137,10 +137,13 @@ class _SearchDoctorPageState extends State<SearchDoctorPage> {
     leading: Container(
       margin: const EdgeInsets.only(left: 16, right: 16),
       child: ClipOval(
-        child: Image.network('http://10.0.2.2:3000/api/doctors/image/doc1.jpg',
+        child: Image.network('http://172.16.0.7:3000/api/doctors/image/${doctor.photo}',
         width: 55,
         height: 55,
         fit: BoxFit.fill,
+        errorBuilder: (context, error, stackTrace) {
+          return Image.asset('assets/images/doctor_logo.png');
+        },
         ),
       ),
     ),
