@@ -31,30 +31,70 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-  getIt<ContextManager>().context = context;
+    getIt<ContextManager>().context = context;
 
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      // theme:  mainTheme(),
-      home: Builder(
-        builder: (context) => Scaffold(
-      appBar: AppBar(
-        title: const Text("Inicio"),
-        backgroundColor: colorPrimary,
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SearchDoctorPage())),
-            // onPressed: () => _mostrarAjustes(context),
-          )
-        ]
-      ),
-    ),
-  )
-  );
-    
-    
+        debugShowCheckedModeBanner: false,
+        // theme:  mainTheme(),
+        home: Builder(
+          builder: (context) => Scaffold(
+            body: Center(
+              child: Container(
+                width: 250,
+                height: 250,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/doctor_logo.png'),
+                      fit: BoxFit.cover,
+                    )
+                ),
+              ),
+            ) ,
+            appBar: AppBar(
+                title: Center(child: const Text("Inicio")),
+                backgroundColor: colorPrimary,
+                actions: <Widget>[]
+            ),
+            bottomNavigationBar: Container(
+              height: 60,
+              color: colorPrimary,
+              child: InkWell(
+                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SearchDoctorPage())),
+                child: Padding(
+                  padding: EdgeInsets.only(top: 8.0),
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.arrow_circle_right,
+                        color:  Colors.white,
+                        size: 25,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0,3,0,0),
+                        child: Text('Buscar doctores.',
+                          style: TextStyle(
+                              color: Colors.white
+                          ),),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            )
+
+            ,
+          ),
+        )
+    );
+
+
   }
 
+
+  void _mostrarAjustes(BuildContext context) {
+    context = getIt<ContextManager>().context;
+    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => SearchDoctorPage())
+    );
+  }
 
 }
